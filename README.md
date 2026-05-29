@@ -46,8 +46,27 @@ print(norm(3, 5))  # 19
 
 Eisenstein triples connect to the conservation spectral ecosystem through the hexagonal lattice's role as the optimal 2D packing. The D₆ symmetry group governing triple orbits is the same Weyl group that appears in the root-system decompositions underlying conservation spectral signatures. The parametric structure of Eisenstein triples — where norms factorize according to the arithmetic of Z[ω] — parallels how conservation laws decompose physical systems into spectral components along lattice-theoretic lines.
 
+## Testing
+
+```bash
+pip install pytest
+pytest tests/ -v
+```
+
+21 tests covering:
+- Eisenstein norm computation (basic values, non-negativity, symmetry)
+- Triple verification (known triples, non-triples)
+- Primitivity (units, scaled pairs, edge cases)
+- D₆ Weyl orbit (rotation norm preservation, size, membership)
+- Triple generation (small sets, primitive subset, monotonicity)
+- Parametric form (verification against norm)
+- Density comparison (Eisenstein vs Pythagorean)
+- Multiplication closure in Z[ω]
+
 ## Provenance
 
 Extracted from the [forgemaster](https://github.com/SuperInstance/forgemaster) `retro-sunset-plato` branch. Developed as part of the Retro Sunset Plato research program.
 
-Part of the [SuperInstance OpenConstruct](https://github.com/SuperInstance/OpenConstruct) ecosystem.
+---
+
+Part of the [OpenConstruct](https://github.com/SuperInstance) ecosystem.
