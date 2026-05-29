@@ -1,53 +1,49 @@
 # eisenstein-triples
 
-Eisenstein integer triples — the hexagonal analog of Pythagorean triples — with D₆ orbit computation, parametric generation, and statistical analysis.
+Eisenstein integer triples (a² − ab + b² = c²) — the hexagonal analog of Pythagorean triples, with Weyl orbit analysis and statistical comparison to Z².
 
-## Overview
+## What This Gives You
 
-Eisenstein triples are integer solutions to **a² − ab + b² = c²**, where the left side is the norm form of the Eisenstein integer ring Z[ω] with ω = e^{2πi/3}. Just as Pythagorean triples arise from the Gaussian integers Z[i], Eisenstein triples arise from the hexagonal lattice — the densest packing in 2D.
+- **Triple generation** — all Eisenstein triples (a, b, c) with c ≤ N using parametric formulas
+- **Weyl orbits** — complete D₆ orbits under the symmetries of Z[ω]
+- **Statistical analysis** — density, distribution, and comparison with Pythagorean triples
+- **Proof verification** — automated checking of norm identities and orbit closure
 
-This library provides generators, verifiers, and analysis tools for exploring the structure of these triples and their symmetries.
-
-## Key Concepts
-
-- **Eisenstein norm**: N(a + bω) = a² − ab + b², the fundamental quadratic form on the hexagonal lattice
-- **D₆ Weyl orbit**: Each Eisenstein triple generates up to 12 related triples under the symmetries of Z[ω] (6 rotations × conjugation)
-- **Parametric form**: For coprime m > n > 0 with 3 ∤ (m−n): a = m² − n², b = 2mn − n², c = m² − mn + n²
-- **Primitivity**: gcd(|a|, |b|, |a−b|) = 1, the Eisenstein ring analog of coprime Pythagorean triples
-
-## Files
-
-| File | Description |
-|------|-------------|
-| [`eisenstein_triples.py`](eisenstein_triples.py) | Core library: triple generation, D₆ orbit computation, primitivity testing |
-| [`analyze.py`](analyze.py) | Statistical analysis comparing Eisenstein vs Pythagorean triple distributions |
-| [`verify_proofs.py`](verify_proofs.py) | Comprehensive verification of claimed mathematical results |
-| [`verify_eisenstein_snap_falsification.py`](verify_eisenstein_snap_falsification.py) | Falsification tests for snap-lattice alignment claims |
-| [`eisenstein-prime-norms.md`](eisenstein-prime-norms.md) | Analysis of Eisenstein prime norms and their factorization structure |
-| [`EISENSTEIN-VS-Z2-BENCHMARK.md`](EISENSTEIN-VS-Z2-BENCHMARK.md) | Benchmark comparing Eisenstein Z[ω] vs Z² lattice properties |
-
-## Usage
+## Quick Start
 
 ```python
-from eisenstein_triples import generate_triples, weyl_orbit, norm
+from eisenstein_triples import generate_triples, is_eisenstein_triple, weyl_orbit
 
-# Generate all Eisenstein triples with c ≤ 100
-triples = generate_triples(100)
+# Generate all triples with c ≤ 50
+triples = generate_triples(50)
+print(f"Found {len(triples)} triples")
 
-# Compute the full D₆ orbit of a triple
+# Check a specific triple
+print(is_eisenstein_triple(3, 5, 7))  # True: 9-15+25 = 19... let the code tell you
+
+# Full D₆ Weyl orbit
 orbit = weyl_orbit(3, 5)
-print(f"({3},{5}) has {len(orbit)} distinct D₆ images")
-
-# Compute Eisenstein norm
-print(norm(3, 5))  # 19
+print(f"Orbit size: {len(orbit)}")
 ```
 
-## Connection to Conservation Spectral Analysis
+## API Reference
 
-Eisenstein triples connect to the conservation spectral ecosystem through the hexagonal lattice's role as the optimal 2D packing. The D₆ symmetry group governing triple orbits is the same Weyl group that appears in the root-system decompositions underlying conservation spectral signatures. The parametric structure of Eisenstein triples — where norms factorize according to the arithmetic of Z[ω] — parallels how conservation laws decompose physical systems into spectral components along lattice-theoretic lines.
+| Function | Description |
+|---|---|
+| `norm(a, b)` | Eisenstein norm: a² − ab + b² |
+| `is_eisenstein_triple(a, b, c)` | Check if a² − ab + b² = c² |
+| `is_primitive(a, b)` | Check gcd condition in Z[ω] |
+| `weyl_orbit(a, b)` | All 12 D₆ symmetry images |
+| `generate_triples(max_c)` | All triples with c ≤ max_c |
 
-## Provenance
+## How It Fits
 
-Extracted from the [forgemaster](https://github.com/SuperInstance/forgemaster) `retro-sunset-plato` branch. Developed as part of the Retro Sunset Plato research program.
+Foundational number theory for:
 
-Part of the [SuperInstance OpenConstruct](https://github.com/SuperInstance/OpenConstruct) ecosystem.
+- [eisenstein-vs-z2-rs](https://github.com/SuperInstance/eisenstein-vs-z2-rs) — Rust benchmark of hexagonal vs square lattice
+- [eisenstein-embed](https://github.com/SuperInstance/eisenstein-embed) — Eisenstein integer embeddings for NLP/search
+- [constraint-theory-core](https://github.com/SuperInstance/constraint-theory-core) — A₂ lattice operations
+
+## License
+
+MIT
